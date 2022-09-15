@@ -1,5 +1,6 @@
 <template>
   <h1>IronContacts</h1>
+  <button @click="getRandomContact">Add Random Contact</button>
   <table>
     <thead>
       <th>Picture</th>
@@ -9,15 +10,18 @@
       <th>Won Emmy</th>
     </thead>
     <tbody>
-      <tr v-for="person in contacts.slice(0, 5)" :key="person.id">
+      <tr v-for="contact in currentContacts" :key="contact.id">
         <td>
-          <img :src="person.pictureUrl" :alt="`${person.name} profile image`" />
+          <img
+            :src="contact.pictureUrl"
+            :alt="`${contact.name} profile image`"
+          />
         </td>
-        <td>{{ person.name }}</td>
-        <td>{{ person.popularity.toFixed(2) }}</td>
-        <td v-if="person.wonOscar">🏆</td>
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.popularity.toFixed(2) }}</td>
+        <td v-if="contact.wonOscar">🏆</td>
         <td v-else>&#32;</td>
-        <td v-if="person.wonEmmy">🏆</td>
+        <td v-if="contact.wonEmmy">🏆</td>
         <td v-else>&#32;</td>
       </tr>
     </tbody>
@@ -31,7 +35,20 @@ export default {
   data() {
     return {
       contacts,
+      currentContacts: [...contacts].slice(0, 5),
+      maxContacts: contacts.length,
     };
+  },
+  methods: {
+    getRandomContact() {
+      let i = Math.floor(Math.random() * this.maxContacts);
+      this.addRandomContact(this.contacts[i]);
+    },
+    addRandomContact(randomContact) {
+      this.currentContacts.find((contact) => contact.id === randomContact.id)
+        ? this.getRandomContact()
+        : this.currentContacts.push(randomContact);
+    },
   },
 };
 </script>
