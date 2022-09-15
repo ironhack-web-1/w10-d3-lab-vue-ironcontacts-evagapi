@@ -1,6 +1,8 @@
 <template>
   <h1>IronContacts</h1>
   <button @click="getRandomContact">Add Random Contact</button>
+  <button @click="sortByPopularity">Sort by Popularity</button>
+  <button @click="sortByName">Sort by Name</button>
   <table>
     <thead>
       <th>Picture</th>
@@ -54,6 +56,16 @@ export default {
     deleteContact(contactID) {
       this.currentContacts = this.currentContacts.filter(
         (contact) => contact.id !== contactID
+      );
+    },
+    sortByPopularity() {
+      this.currentContacts.sort((a, b) =>
+        a.popularity > b.popularity ? -1 : b.popularity > a.popularity ? 1 : 0
+      );
+    },
+    sortByName() {
+      this.currentContacts.sort((a, b) =>
+        a.name > b.name ? 1 : b.name > a.name ? -1 : 0
       );
     },
   },
