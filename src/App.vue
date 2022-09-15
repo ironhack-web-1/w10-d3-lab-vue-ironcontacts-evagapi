@@ -5,6 +5,8 @@
       <th>Picture</th>
       <th>Name</th>
       <th>Popularity</th>
+      <th>Won Oscar</th>
+      <th>Won Emmy</th>
     </thead>
     <tbody>
       <tr v-for="person in contacts" :key="person.id">
@@ -13,12 +15,13 @@
         </td>
         <td>{{ person.name }}</td>
         <td>{{ person.popularity.toFixed(2) }}</td>
+        <td v-if="person.wonOscar">🏆</td>
+        <td v-else>&#32;</td>
+        <td v-if="person.wonEmmy">🏆</td>
+        <td v-else>&#32;</td>
       </tr>
     </tbody>
   </table>
-  <!-- <ul>
-    <li v-for="person in contacts">{{ person.name }}</li>
-  </ul> -->
 </template>
 
 <script>
@@ -43,11 +46,19 @@ export default {
   margin-top: 60px;
 }
 
+h1 {
+  margin-bottom: 4rem;
+}
+
 img {
   max-width: 100px;
 }
 
 table {
   margin: auto;
+}
+
+th {
+  padding: 1rem 2rem;
 }
 </style>
