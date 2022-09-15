@@ -9,7 +9,7 @@
       <th>Won Emmy</th>
     </thead>
     <tbody>
-      <tr v-for="person in contacts" :key="person.id">
+      <tr v-for="person in contacts.slice(0, 5)" :key="person.id">
         <td>
           <img :src="person.pictureUrl" :alt="`${person.name} profile image`" />
         </td>
