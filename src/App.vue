@@ -8,6 +8,7 @@
       <th>Popularity</th>
       <th>Won Oscar</th>
       <th>Won Emmy</th>
+      <th>Actions</th>
     </thead>
     <tbody>
       <tr v-for="contact in currentContacts" :key="contact.id">
@@ -23,6 +24,7 @@
         <td v-else>&#32;</td>
         <td v-if="contact.wonEmmy">🏆</td>
         <td v-else>&#32;</td>
+        <td><button @click="deleteContact(contact.id)">Delete</button></td>
       </tr>
     </tbody>
   </table>
@@ -48,6 +50,11 @@ export default {
       this.currentContacts.find((contact) => contact.id === randomContact.id)
         ? this.getRandomContact()
         : this.currentContacts.push(randomContact);
+    },
+    deleteContact(contactID) {
+      this.currentContacts = this.currentContacts.filter(
+        (contact) => contact.id !== contactID
+      );
     },
   },
 };
